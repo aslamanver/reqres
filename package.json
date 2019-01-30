@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "./app.js"
   },
   "author": "Ben Howdle <hello@benhowdle.im> (http://benhowdle.im/)",
   "license": "ISC",
