@@ -3,7 +3,7 @@ var data = require("./../data.json"),
 
 module.exports = {
 
-	get: function(req, res, next) {
+	get: function (req, res, next) {
 		var resource = req.params.resource,
 			itemArg = req.params[0] || req.query.id || null,
 			items;
@@ -21,7 +21,7 @@ module.exports = {
 		}
 	},
 
-	post: function(req, res, next) {
+	post: function (req, res, next) {
 		var id = req.body.id || (Math.ceil(Math.random() * 1000)).toString().substring(0, 3),
 			returnData = req.body;
 		returnData.id = id;
@@ -30,28 +30,28 @@ module.exports = {
 		return res.status(201).send(returnData);
 	},
 
-	put: function(req, res, next) {
+	put: function (req, res, next) {
 		var returnData = req.body;
 		returnData.updatedAt = new Date().toISOString();
 		return res.status(200).send(returnData);
 	},
 
-	patch: function(req, res, next) {
+	patch: function (req, res, next) {
 		var returnData = req.body;
 		returnData.updatedAt = new Date().toISOString();
 		return res.status(200).send(returnData);
 	},
 
-	delete: function(req, res, next) {
+	delete: function (req, res, next) {
 		return res.status(204).send({});
 	},
 
-	login: function(req, res, next) {
+	login: function (req, res, next) {
 		if (req.body.username || req.body.email) {
 			if (req.body.password) {
-				const user = data.users.find( usersearch => usersearch.email === req.body.email );
+				const user = data.users.find(usersearch => usersearch.email === req.body.email);
 				if (user) {
-					const token = data.tokens.find( token => token.id === user.id );
+					const token = data.tokens.find(token => token.id === user.id);
 					if (token) {
 						return res.status(200).send({
 							token: token.token
@@ -74,12 +74,12 @@ module.exports = {
 		}
 	},
 
-	register: function(req, res, next) {
+	register: function (req, res, next) {
 		if (req.body.username || req.body.email) {
 			if (req.body.password) {
-				const user = data.users.find( usersearch => usersearch.email === req.body.email );
+				const user = data.users.find(usersearch => usersearch.email === req.body.email);
 				if (user) {
-					const token = data.tokens.find( token => token.id === user.id );
+					const token = data.tokens.find(token => token.id === user.id);
 					if (token) {
 						return res.status(200).send({
 							id: user.id,
@@ -103,7 +103,7 @@ module.exports = {
 		}
 	},
 
-	logout: function(req, res, next) {
+	logout: function (req, res, next) {
 		return res.status(200).send({});
 	}
 
@@ -124,7 +124,7 @@ function returnAll(items, req, res) {
 }
 
 function returnSingle(items, itemArg, res) {
-	var singleItem = items.filter(function(item) {
+	var singleItem = items.filter(function (item) {
 		return item.id == itemArg;
 	});
 	if (singleItem.length) {
